@@ -1,0 +1,1209 @@
+{
+  "version": "5",
+  "dialect": "mysql",
+  "id": "8b144a1e-f58b-4353-9ca2-4f13d8a370ad",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "apuracoes": {
+      "name": "apuracoes",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "periodo_id": {
+          "name": "periodo_id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "consultor_id": {
+          "name": "consultor_id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "comissao_total": {
+          "name": "comissao_total",
+          "type": "decimal(12,2)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "bonificacao": {
+          "name": "bonificacao",
+          "type": "decimal(12,2)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "valor_nf": {
+          "name": "valor_nf",
+          "type": "decimal(12,2)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "debitos": {
+          "name": "debitos",
+          "type": "decimal(12,2)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "valor_liquido": {
+          "name": "valor_liquido",
+          "type": "decimal(12,2)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "producao_total": {
+          "name": "producao_total",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "detalhe": {
+          "name": "detalhe",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "apuracao_unica": {
+          "name": "apuracao_unica",
+          "columns": [
+            "periodo_id",
+            "consultor_id"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "apuracoes_periodo_id_periodos_id_fk": {
+          "name": "apuracoes_periodo_id_periodos_id_fk",
+          "tableFrom": "apuracoes",
+          "tableTo": "periodos",
+          "columnsFrom": [
+            "periodo_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "apuracoes_consultor_id_consultores_id_fk": {
+          "name": "apuracoes_consultor_id_consultores_id_fk",
+          "tableFrom": "apuracoes",
+          "tableTo": "consultores",
+          "columnsFrom": [
+            "consultor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "apuracoes_id": {
+          "name": "apuracoes_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "consultor_nomes_sga": {
+      "name": "consultor_nomes_sga",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "consultor_id": {
+          "name": "consultor_id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "nome": {
+          "name": "nome",
+          "type": "varchar(160)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "nome_normalizado": {
+          "name": "nome_normalizado",
+          "type": "varchar(160)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "nome_sga_unico": {
+          "name": "nome_sga_unico",
+          "columns": [
+            "nome_normalizado"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "consultor_nomes_sga_consultor_id_consultores_id_fk": {
+          "name": "consultor_nomes_sga_consultor_id_consultores_id_fk",
+          "tableFrom": "consultor_nomes_sga",
+          "tableTo": "consultores",
+          "columnsFrom": [
+            "consultor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "consultor_nomes_sga_id": {
+          "name": "consultor_nomes_sga_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "consultores": {
+      "name": "consultores",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "nome": {
+          "name": "nome",
+          "type": "varchar(160)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "cpf_cnpj": {
+          "name": "cpf_cnpj",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(160)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "telefone": {
+          "name": "telefone",
+          "type": "varchar(30)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "pix": {
+          "name": "pix",
+          "type": "varchar(160)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "tipo_veiculo": {
+          "name": "tipo_veiculo",
+          "type": "enum('MOTO','CARRO','S/V')",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "vinculo": {
+          "name": "vinculo",
+          "type": "enum('PJ','CLT','ADM')",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "ativo": {
+          "name": "ativo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": true
+        },
+        "observacao": {
+          "name": "observacao",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "criado_em": {
+          "name": "criado_em",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "consultores_id": {
+          "name": "consultores_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "despesas": {
+      "name": "despesas",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "periodo_id": {
+          "name": "periodo_id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "consultor_id": {
+          "name": "consultor_id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "descricao": {
+          "name": "descricao",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "data": {
+          "name": "data",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "valor": {
+          "name": "valor",
+          "type": "decimal(12,2)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "observacao": {
+          "name": "observacao",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "desp_periodo": {
+          "name": "desp_periodo",
+          "columns": [
+            "periodo_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "despesas_periodo_id_periodos_id_fk": {
+          "name": "despesas_periodo_id_periodos_id_fk",
+          "tableFrom": "despesas",
+          "tableTo": "periodos",
+          "columnsFrom": [
+            "periodo_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "despesas_consultor_id_consultores_id_fk": {
+          "name": "despesas_consultor_id_consultores_id_fk",
+          "tableFrom": "despesas",
+          "tableTo": "consultores",
+          "columnsFrom": [
+            "consultor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "despesas_id": {
+          "name": "despesas_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "indicacoes": {
+      "name": "indicacoes",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "recebedor_id": {
+          "name": "recebedor_id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "indicado_id": {
+          "name": "indicado_id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "percentual": {
+          "name": "percentual",
+          "type": "decimal(6,4)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'0.0200'"
+        },
+        "observacao": {
+          "name": "observacao",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "criado_em": {
+          "name": "criado_em",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
+        }
+      },
+      "indexes": {
+        "indicado_unico": {
+          "name": "indicado_unico",
+          "columns": [
+            "indicado_id"
+          ],
+          "isUnique": true
+        },
+        "recebedor": {
+          "name": "recebedor",
+          "columns": [
+            "recebedor_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "indicacoes_recebedor_id_consultores_id_fk": {
+          "name": "indicacoes_recebedor_id_consultores_id_fk",
+          "tableFrom": "indicacoes",
+          "tableTo": "consultores",
+          "columnsFrom": [
+            "recebedor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "indicacoes_indicado_id_consultores_id_fk": {
+          "name": "indicacoes_indicado_id_consultores_id_fk",
+          "tableFrom": "indicacoes",
+          "tableTo": "consultores",
+          "columnsFrom": [
+            "indicado_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "indicacoes_id": {
+          "name": "indicacoes_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "lancamentos": {
+      "name": "lancamentos",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "periodo_id": {
+          "name": "periodo_id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "consultor_id": {
+          "name": "consultor_id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "empresa": {
+          "name": "empresa",
+          "type": "enum('TRIUNI','AGV','SAFE_CLUB')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "faturamento": {
+          "name": "faturamento",
+          "type": "decimal(12,2)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "comissao": {
+          "name": "comissao",
+          "type": "decimal(12,2)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "placas": {
+          "name": "placas",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "lanc_periodo": {
+          "name": "lanc_periodo",
+          "columns": [
+            "periodo_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "lancamentos_periodo_id_periodos_id_fk": {
+          "name": "lancamentos_periodo_id_periodos_id_fk",
+          "tableFrom": "lancamentos",
+          "tableTo": "periodos",
+          "columnsFrom": [
+            "periodo_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "lancamentos_consultor_id_consultores_id_fk": {
+          "name": "lancamentos_consultor_id_consultores_id_fk",
+          "tableFrom": "lancamentos",
+          "tableTo": "consultores",
+          "columnsFrom": [
+            "consultor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "lancamentos_id": {
+          "name": "lancamentos_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "notas_fiscais": {
+      "name": "notas_fiscais",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "periodo_id": {
+          "name": "periodo_id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "consultor_id": {
+          "name": "consultor_id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "emissor": {
+          "name": "emissor",
+          "type": "enum('COOPERCAR_TRIUNI','SAFE_AGV')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "valor": {
+          "name": "valor",
+          "type": "decimal(12,2)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "status": {
+          "name": "status",
+          "type": "enum('PENDENTE','ENVIADA','APROVADA','REPROVADA')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'PENDENTE'"
+        },
+        "numero": {
+          "name": "numero",
+          "type": "varchar(40)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "arquivo": {
+          "name": "arquivo",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "enviada_em": {
+          "name": "enviada_em",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "motivo_reprovacao": {
+          "name": "motivo_reprovacao",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "avaliada_por": {
+          "name": "avaliada_por",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "avaliada_em": {
+          "name": "avaliada_em",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "nota_unica": {
+          "name": "nota_unica",
+          "columns": [
+            "periodo_id",
+            "consultor_id",
+            "emissor"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "notas_fiscais_periodo_id_periodos_id_fk": {
+          "name": "notas_fiscais_periodo_id_periodos_id_fk",
+          "tableFrom": "notas_fiscais",
+          "tableTo": "periodos",
+          "columnsFrom": [
+            "periodo_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "notas_fiscais_consultor_id_consultores_id_fk": {
+          "name": "notas_fiscais_consultor_id_consultores_id_fk",
+          "tableFrom": "notas_fiscais",
+          "tableTo": "consultores",
+          "columnsFrom": [
+            "consultor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "notas_fiscais_avaliada_por_usuarios_id_fk": {
+          "name": "notas_fiscais_avaliada_por_usuarios_id_fk",
+          "tableFrom": "notas_fiscais",
+          "tableTo": "usuarios",
+          "columnsFrom": [
+            "avaliada_por"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "notas_fiscais_id": {
+          "name": "notas_fiscais_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "pagamentos": {
+      "name": "pagamentos",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "periodo_id": {
+          "name": "periodo_id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "consultor_id": {
+          "name": "consultor_id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "valor": {
+          "name": "valor",
+          "type": "decimal(12,2)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "pago_em": {
+          "name": "pago_em",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "comprovante": {
+          "name": "comprovante",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "registrado_por": {
+          "name": "registrado_por",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "criado_em": {
+          "name": "criado_em",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
+        }
+      },
+      "indexes": {
+        "pagamento_unico": {
+          "name": "pagamento_unico",
+          "columns": [
+            "periodo_id",
+            "consultor_id"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "pagamentos_periodo_id_periodos_id_fk": {
+          "name": "pagamentos_periodo_id_periodos_id_fk",
+          "tableFrom": "pagamentos",
+          "tableTo": "periodos",
+          "columnsFrom": [
+            "periodo_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "pagamentos_consultor_id_consultores_id_fk": {
+          "name": "pagamentos_consultor_id_consultores_id_fk",
+          "tableFrom": "pagamentos",
+          "tableTo": "consultores",
+          "columnsFrom": [
+            "consultor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "pagamentos_registrado_por_usuarios_id_fk": {
+          "name": "pagamentos_registrado_por_usuarios_id_fk",
+          "tableFrom": "pagamentos",
+          "tableTo": "usuarios",
+          "columnsFrom": [
+            "registrado_por"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "pagamentos_id": {
+          "name": "pagamentos_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "periodos": {
+      "name": "periodos",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "mes": {
+          "name": "mes",
+          "type": "char(7)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "status": {
+          "name": "status",
+          "type": "enum('ABERTO','FECHADO')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'ABERTO'"
+        },
+        "fechado_em": {
+          "name": "fechado_em",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "criado_em": {
+          "name": "criado_em",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
+        }
+      },
+      "indexes": {
+        "mes_unico": {
+          "name": "mes_unico",
+          "columns": [
+            "mes"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "periodos_id": {
+          "name": "periodos_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "sessoes": {
+      "name": "sessoes",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "char(64)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "usuario_id": {
+          "name": "usuario_id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "expira_em": {
+          "name": "expira_em",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "criado_em": {
+          "name": "criado_em",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
+        }
+      },
+      "indexes": {
+        "sessao_usuario": {
+          "name": "sessao_usuario",
+          "columns": [
+            "usuario_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "sessoes_usuario_id_usuarios_id_fk": {
+          "name": "sessoes_usuario_id_usuarios_id_fk",
+          "tableFrom": "sessoes",
+          "tableTo": "usuarios",
+          "columnsFrom": [
+            "usuario_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "sessoes_id": {
+          "name": "sessoes_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "sga_linhas": {
+      "name": "sga_linhas",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "periodo_id": {
+          "name": "periodo_id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "nome_sga": {
+          "name": "nome_sga",
+          "type": "varchar(160)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "faturamento": {
+          "name": "faturamento",
+          "type": "decimal(12,2)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "placas": {
+          "name": "placas",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "sga_periodo": {
+          "name": "sga_periodo",
+          "columns": [
+            "periodo_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "sga_linhas_periodo_id_periodos_id_fk": {
+          "name": "sga_linhas_periodo_id_periodos_id_fk",
+          "tableFrom": "sga_linhas",
+          "tableTo": "periodos",
+          "columnsFrom": [
+            "periodo_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "sga_linhas_id": {
+          "name": "sga_linhas_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "usuarios": {
+      "name": "usuarios",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "nome": {
+          "name": "nome",
+          "type": "varchar(160)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(160)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "senha_hash": {
+          "name": "senha_hash",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "perfil": {
+          "name": "perfil",
+          "type": "enum('ADMIN','FINANCEIRO','CONSULTOR')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "consultor_id": {
+          "name": "consultor_id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "ativo": {
+          "name": "ativo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": true
+        },
+        "trocar_senha": {
+          "name": "trocar_senha",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": true
+        },
+        "ultimo_acesso": {
+          "name": "ultimo_acesso",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "criado_em": {
+          "name": "criado_em",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
+        }
+      },
+      "indexes": {
+        "email_unico": {
+          "name": "email_unico",
+          "columns": [
+            "email"
+          ],
+          "isUnique": true
+        },
+        "consultor_unico": {
+          "name": "consultor_unico",
+          "columns": [
+            "consultor_id"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "usuarios_consultor_id_consultores_id_fk": {
+          "name": "usuarios_consultor_id_consultores_id_fk",
+          "tableFrom": "usuarios",
+          "tableTo": "consultores",
+          "columnsFrom": [
+            "consultor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "usuarios_id": {
+          "name": "usuarios_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    }
+  },
+  "views": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "tables": {},
+    "indexes": {}
+  }
+}
